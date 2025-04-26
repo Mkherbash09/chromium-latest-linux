@@ -24,8 +24,14 @@ mkdir $REVISION
 pushd $REVISION
 curl -# $ZIP_URL > $ZIP_FILE
 echo "unzipping.."
+
+if ! command -v unzip &> /dev/null
+then
+    echo "unzip command could not be found. Please install unzip and try again."
+    exit
+fi
+
 unzip $ZIP_FILE
 popd
 rm -f ./latest
 ln -s $REVISION/chrome-linux/ ./latest
-
